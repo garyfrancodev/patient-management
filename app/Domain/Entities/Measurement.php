@@ -32,6 +32,4 @@ class Measurement extends Entity
         $this->weight = $weight;
         $this->notes = $notes;
     }
-
-
 }

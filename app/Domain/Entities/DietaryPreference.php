@@ -12,8 +12,9 @@ class DietaryPreference extends Entity
     /**
      * @param string $patientId
      * @param string $preference
+     * @param ?string $id
      */
-    public function __construct(string $patientId, string $preference, ?string $id)
+    public function __construct(string $patientId, string $preference, ?string $id = null)
     {
         parent::__construct($id);
         $this->patientId = $patientId;
