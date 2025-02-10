@@ -1,0 +1,41 @@
+{
+  "consumer": {
+    "name": "personConsumer"
+  },
+  "interactions": [
+    {
+      "description": "A get request to /hello/{name}",
+      "request": {
+        "headers": {
+          "Accept": "application/json"
+        },
+        "method": "GET",
+        "path": "/person/abc-123-def-456"
+      },
+      "response": {
+        "body": {
+          "alias": "Zero Cool",
+          "first_name": "Dade",
+          "last_name": "Murphy"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.4.26",
+      "mockserver": "1.2.11",
+      "models": "1.2.7"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "personProvider"
+  }
+}
