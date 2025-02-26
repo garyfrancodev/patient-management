@@ -26,4 +26,13 @@ class DietaryPreference extends Entity
         $this->preference = $newValue;
     }
 
+    public function getPatientId(): string
+    {
+        return $this->patientId;
+    }
+
+    public function getPreference(): string
+    {
+        return $this->preference;
+    }
 }

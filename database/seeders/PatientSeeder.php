@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Infrastructure\Persistence\Models\Patient;
+use App\Infrastructure\Persistence\Models\PatientModel;
 use Illuminate\Database\Seeder;
 
 class PatientSeeder extends Seeder
@@ -12,7 +12,7 @@ class PatientSeeder extends Seeder
      */
     public function run(): void
     {
-        Patient::create([
+        PatientModel::create([
             'id' => '884aa4cb-287c-455e-9f2e-3f6e0b37e190',
             'user_id' => '884aa4cb-287c-455e-9f2e-3f6e0b37e192',
             'name' => 'John Doe',

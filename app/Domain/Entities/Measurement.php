@@ -22,7 +22,7 @@ class Measurement extends Entity
      * @param string $bodyFat
      * @param string $notes
      */
-    public function __construct(string $patientId, ?string $consultationId, string $height, string $weight, string $bodyFat, string $notes, ?string $id)
+    public function __construct(string $patientId, ?string $consultationId, string $height, string $weight, string $bodyFat, string $notes, ?string $id = null)
     {
         parent::__construct($id);
         $this->consultationId = $consultationId;
@@ -31,5 +31,35 @@ class Measurement extends Entity
         $this->height = $height;
         $this->weight = $weight;
         $this->notes = $notes;
+    }
+
+    public function getPatientId(): string
+    {
+        return $this->patientId;
+    }
+
+    public function getConsultationId(): ?string
+    {
+        return $this->consultationId;
+    }
+
+    public function getHeight(): string
+    {
+        return $this->height;
+    }
+
+    public function getWeight(): string
+    {
+        return $this->weight;
+    }
+
+    public function getBodyFat(): string
+    {
+        return $this->bodyFat;
+    }
+
+    public function getNotes(): string
+    {
+        return $this->notes;
     }
 }

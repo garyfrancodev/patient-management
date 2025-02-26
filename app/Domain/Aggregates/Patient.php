@@ -2,6 +2,9 @@
 
 namespace App\Domain\Aggregates;
 
+use App\Domain\Entities\Address;
+use App\Domain\Entities\DietaryPreference;
+use App\Domain\Entities\Measurement;
 use App\Domain\Events\PatientCreated;
 use App\Domain\ValueObjects\DniVO;
 use App\Domain\ValueObjects\DobVO;
@@ -9,6 +12,7 @@ use App\Domain\ValueObjects\EmailVO;
 use App\Domain\ValueObjects\FullNameVO;
 use App\Domain\ValueObjects\GenderVO;
 use App\Shared\AggregateRoot;
+use PHPUnit\Framework\Attributes\Ticket;
 
 class Patient extends AggregateRoot
 {
@@ -19,6 +23,10 @@ class Patient extends AggregateRoot
     private DniVO $dniVO;
     private string $phone;
     private string $userId;
+    private array $addresses = [];
+    private array $dietaryPreferences = [];
+    private array $measurements = [];
+    private array $tickets = [];
 
     /**
      * @param DobVO $dobVO
@@ -41,6 +49,25 @@ class Patient extends AggregateRoot
         $this->phone = $phone;
         $this->dobVO = $dobVO;
         $this->domainEvents[] = new PatientCreated($emailVO->getEmail());
+    }
+
+    public function addAddress(Address $address): void {
+        $this->addresses[] = $address;
+    }
+
+    public function addDietaryPreference(DietaryPreference $preference): void
+    {
+        $this->dietaryPreferences[] = $preference;
+    }
+
+    public function addMeasurement(Measurement $measurement): void
+    {
+        $this->measurements[] = $measurement;
+    }
+
+    public function addTicket(Ticket $ticket): void
+    {
+        $this->tickets[] = $ticket;
     }
 
     public function updateFullName(FullNameVO $fullNameVO): void

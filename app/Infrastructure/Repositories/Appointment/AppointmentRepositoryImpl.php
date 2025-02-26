@@ -3,7 +3,7 @@
 namespace App\Infrastructure\Repositories\Appointment;
 
 use App\Domain\Repositories\AppointmentRepository;
-use App\Infrastructure\Persistence\Models\Appointment;
+use App\Infrastructure\Persistence\Models\AppointmentModel;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Aggregates\Appointment as AppointmentDomain;
 use Illuminate\Support\Collection;
@@ -13,7 +13,7 @@ class AppointmentRepositoryImpl implements AppointmentRepository
 
     public function getByIdAsync(string $id): Model
     {
-        return Appointment::find($id);
+        return AppointmentModel::find($id);
     }
 
     /**
@@ -29,11 +29,11 @@ class AppointmentRepositoryImpl implements AppointmentRepository
             'status' => $entity->getStatus()
         ];
 
-        return Appointment::create($data);
+        return AppointmentModel::create($data);
     }
 
     public function getAppointmentsByNutritionistId($id): Collection
     {
-        return Appointment::where('nutritionist_id', $id)->get();
+        return AppointmentModel::where('nutritionist_id', $id)->get();
     }
 }

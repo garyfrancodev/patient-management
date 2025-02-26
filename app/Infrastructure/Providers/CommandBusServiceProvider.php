@@ -6,12 +6,16 @@ use App\Application\UseCases\Appointment\Command\CreateAppointmentCommand;
 use App\Application\UseCases\Appointment\Command\CreateAppointmentCommandHandler;
 use App\Application\UseCases\Appointment\Queries\GetAppointmentsByNutritionistIdQuery;
 use App\Application\UseCases\Appointment\Queries\GetAppointmentsByNutritionistIdQueryHandler;
-use App\Application\UseCases\ClinicalResource\CreateClinicalResource;
-use App\Application\UseCases\ClinicalResource\CreateClinicalResourceHandler;
-use App\Application\UseCases\Patient\Command\CreatePatientAddressCommand;
-use App\Application\UseCases\Patient\Command\CreatePatientAddressCommandHandler;
+use App\Application\UseCases\Patient\Command\AddAddressCommand;
+use App\Application\UseCases\Patient\Command\AddAddressCommandHandler;
+use App\Application\UseCases\Patient\Command\AddDietaryPreferenceCommand;
+use App\Application\UseCases\Patient\Command\AddDietaryPreferenceCommandHandler;
+use App\Application\UseCases\Patient\Command\AddMeasurementCommand;
+use App\Application\UseCases\Patient\Command\AddMeasurementCommandHandler;
 use App\Application\UseCases\Patient\Command\CreatePatientCommand;
 use App\Application\UseCases\Patient\Command\CreatePatientCommandHandler;
+use App\Application\UseCases\Patient\Command\CreateTicketCommand;
+use App\Application\UseCases\Patient\Command\CreateTicketCommandHandler;
 use App\Application\UseCases\Patient\Queries\GetAllPatientsQuery;
 use App\Application\UseCases\Patient\Queries\GetAllPatientsQueryHandler;
 use App\Infrastructure\Core\CommandBus;
@@ -30,10 +34,12 @@ class CommandBusServiceProvider extends ServiceProvider
         $this->app->singleton(CommandBus::class, function () {
             $commandBus = new CommandBus();
             //commands
-            $commandBus->register(CreateClinicalResource::class, new CreateClinicalResourceHandler());
-            $commandBus->register(CreateAppointmentCommand::class, new CreateAppointmentCommandHandler(new AppointmentRepositoryImpl()));
+            $commandBus->register(CreateAppointmentCommand::class, new CreateAppointmentCommandHandler(new AppointmentRepositoryImpl(), new EloquentUnitOfWork()));
             $commandBus->register(CreatePatientCommand::class, new CreatePatientCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
-            $commandBus->register(CreatePatientAddressCommand::class, new CreatePatientAddressCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
+            $commandBus->register(AddAddressCommand::class, new AddAddressCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
+            $commandBus->register(AddDietaryPreferenceCommand::class, new AddDietaryPreferenceCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
+            $commandBus->register(AddMeasurementCommand::class, new AddMeasurementCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
+            $commandBus->register(CreateTicketCommand::class, new CreateTicketCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
 
             //queries
             $commandBus->register(GetAppointmentsByNutritionistIdQuery::class, new GetAppointmentsByNutritionistIdQueryHandler(new AppointmentRepositoryImpl()));

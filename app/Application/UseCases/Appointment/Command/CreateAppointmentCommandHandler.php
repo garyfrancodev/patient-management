@@ -4,6 +4,7 @@ namespace App\Application\UseCases\Appointment\Command;
 
 use App\Domain\Factories\AppointmentFactory;
 use App\Domain\Repositories\AppointmentRepository;
+use App\Shared\UnitOfWork;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -11,43 +12,40 @@ use Illuminate\Support\Facades\DB;
 class CreateAppointmentCommandHandler
 {
     private AppointmentRepository $appointmentRepository;
+    private UnitOfWork $unitOfWork;
 
-    public function __construct(AppointmentRepository $appointmentRepository)
+    /**
+     * @param AppointmentRepository $appointmentRepository
+     * @param UnitOfWork $unitOfWork
+     */
+    public function __construct(AppointmentRepository $appointmentRepository, UnitOfWork $unitOfWork)
     {
         $this->appointmentRepository = $appointmentRepository;
+        $this->unitOfWork = $unitOfWork;
     }
+
 
     public function handle(CreateAppointmentCommand $command): JsonResponse
     {
-        try {
-            $createAppointmentRequest = $command->createAppointmentRequest;
-            $patientId = $createAppointmentRequest->get('patient_id');
-            $nutritionistId = $createAppointmentRequest->get('nutritionist_id');
-            $reason = $createAppointmentRequest->get('reason');
+        $patientId = $command->getPatientId();
+        $nutritionistId = $command->getNutritionistId();
+        $reason = $command->getReason();
 
-            $model = AppointmentFactory::create([
-                'patient_id' => $patientId,
-                'nutritionist_id' => $nutritionistId,
-                'reason' => $reason
-            ]);
+        $model = AppointmentFactory::create([
+            'patient_id' => $patientId,
+            'nutritionist_id' => $nutritionistId,
+            'reason' => $reason
+        ]);
 
-            DB::beginTransaction();
-            $this->appointmentRepository->addAsync($model);
+        $appointmentModel = null;
 
-            $events = $model->getDomainEvents();
+        $this->unitOfWork->execute(function () use (&$model, &$appointmentModel) {
+            $appointmentModel = $this->appointmentRepository->addAsync($model);
+            $this->unitOfWork->addDomainEvents($model->getDomainEvents());
+        });
 
-            for ($i = 0; $i < count($events); $i++) {
-                event($events[$i]);
-            }
-
-            DB::commit();
-
-            return response()->json([
-                'data' => $model->getId()
-            ]);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            return $e->getMessageResponse();
-        }
+        return response()->json([
+            'data' => $appointmentModel
+        ]);
     }
 }

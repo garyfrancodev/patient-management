@@ -45,7 +45,7 @@ return [
                  */
                 'annotations' => [
                     base_path('app'),
-                    base_path('app/Interfaces/Http'),
+                    base_path('app/Api/Http'),
                 ],
             ],
         ],

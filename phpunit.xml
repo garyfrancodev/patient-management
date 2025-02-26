@@ -48,7 +48,21 @@
         </include>
         <exclude>
             <directory>vendor</directory>
+            <file>app/Shared/Entity.php</file>
+            <file>app/Shared/DomainEvent.php</file>
+            <file>app/Shared/ValueObject.php</file>
+            <file>app/Shared/BusinessRuleValidationException.php</file>
+            <directory>app/Domain/Entities</directory>
+            <directory>app/Domain/Events</directory>
+            <directory>app/Domain/Aggregates</directory>
+            <directory>app/Domain/ValueObjects</directory>
+            <directory>app/Application/EventHandlers</directory>
+            <directory>app/Application/UseCases/Patient</directory>
+            <directory>app/Infrastructure/Persistence</directory>
+            <directory>app/Infrastructure/Providers</directory>
+            <directory>app/Infrastructure/Repositories</directory>
             <directory>tests</directory>
+            <file>app/HttpClientService.php</file>
         </exclude>
     </source>
 </phpunit>

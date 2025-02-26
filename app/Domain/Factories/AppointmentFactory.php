@@ -15,9 +15,7 @@ class AppointmentFactory
         $reasonVO = new ReasonVO($reason);
         $status = 'pending';
 
-        $appointment = new Appointment($patientId, $nutritionistId, $reasonVO, $status);
-
-        return $appointment;
+        return new Appointment($patientId, $nutritionistId, $reasonVO, $status);
     }
 
 }

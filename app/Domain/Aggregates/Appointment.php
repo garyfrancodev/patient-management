@@ -27,7 +27,6 @@ class Appointment extends AggregateRoot
         $this->reasonVO = $reasonVO;
         $this->status = $status;
         $this->addDomainEvent(new CreatedAppointment());
-        error_log(count($this->getDomainEvents()));
     }
 
     public function updateReason($reason) {

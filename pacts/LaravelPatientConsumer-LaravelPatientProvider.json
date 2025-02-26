@@ -1,0 +1,61 @@
+{
+  "consumer": {
+    "name": "LaravelPatientConsumer"
+  },
+  "interactions": [
+    {
+      "description": "A request to create a new patient",
+      "request": {
+        "body": {
+          "dni": "A123456789",
+          "dob": "2000-05-15",
+          "email": "john.doe@example.com",
+          "full_name": {
+            "first_name": "John",
+            "last_name": "Doe"
+          },
+          "gender": "male",
+          "phone": "123456789",
+          "user_id": "cb1231f8-4f77-4891-a405-e7d7d171fe8"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/api/v1/patient"
+      },
+      "response": {
+        "body": {
+          "dni": "A123456789",
+          "dob": "2000-05-15",
+          "email": "john.doe@example.com",
+          "full_name": {
+            "first_name": "John",
+            "last_name": "Doe"
+          },
+          "gender": "male",
+          "id": "cb1231f8-4f77-4891-a405-e7d7d171fe0",
+          "phone": "123456789",
+          "user_id": "cb1231f8-4f77-4891-a405-e7d7d171fe8"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "status": 201
+      }
+    }
+  ],
+  "metadata": {
+    "pactRust": {
+      "ffi": "0.4.26",
+      "mockserver": "1.2.11",
+      "models": "1.2.7"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "LaravelPatientProvider"
+  }
+}

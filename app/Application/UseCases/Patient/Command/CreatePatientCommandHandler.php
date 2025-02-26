@@ -4,7 +4,6 @@ namespace App\Application\UseCases\Patient\Command;
 
 use App\Domain\Factories\PatientFactory;
 use App\Domain\Repositories\PatientRepository;
-
 use App\Shared\UnitOfWork;
 use Illuminate\Http\JsonResponse;
 
@@ -26,24 +25,23 @@ class CreatePatientCommandHandler
 
     public function handle(CreatePatientCommand $command): JsonResponse
     {
-        $createPatientRequest = $command->createPatientRequest;
         $data = [
-            'user_id' => $createPatientRequest->input('user_id'),
-            'full_name' => $createPatientRequest->input('full_name'),
-            'email' => $createPatientRequest->input('email'),
-            'dni' => $createPatientRequest->input('dni'),
-            'dob' => $createPatientRequest->input('dob'),
-            'gender' => $createPatientRequest->input('gender'),
-            'phone' => $createPatientRequest->input('phone'),
+            'user_id' => $command->getUserId(),
+            'full_name' => $command->getFullName(),
+            'email' => $command->getEmail(),
+            'dni' => $command->getDni(),
+            'dob' => $command->getDob(),
+            'gender' => $command->getGender(),
+            'phone' => $command->getPhone(),
         ];
         $patient = PatientFactory::create($data);
-        $model = null;
+        $patientModel = null;
 
-        $this->unitOfWork->execute(function () use (&$patient, &$model) {
-            $model = $this->patientRepository->addAsync($patient);
+        $this->unitOfWork->execute(function () use (&$patient, &$patientModel) {
+            $patientModel = $this->patientRepository->addAsync($patient);
             $this->unitOfWork->addDomainEvents($patient->getDomainEvents());
         });
 
-        return response()->json(["data" => $model]);
+        return response()->json(["data" => $patientModel]);
     }
 }
