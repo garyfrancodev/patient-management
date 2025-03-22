@@ -14,6 +14,6 @@
 
 docker compose --env-file .env.compose up -d --build
 docker compose exec patient-management bash
+- create .env to laravel
+- composer install
 - php artisan migrate
-
-
