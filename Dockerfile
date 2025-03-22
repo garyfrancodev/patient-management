@@ -11,8 +11,9 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     zip unzip \
     git curl \
+    libffi-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql
+    && docker-php-ext-install gd pdo pdo_mysql ffi
 
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
