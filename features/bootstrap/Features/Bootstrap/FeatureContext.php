@@ -13,7 +13,9 @@ use PHPUnit\Framework\Assert;
 class FeatureContext implements Context
 {
     private Client $client;
+
     private $response;
+
     private array $payload;
 
     public function __construct()
@@ -82,6 +84,6 @@ class FeatureContext implements Context
      */
     public function theResponseStatusCodeShouldBe($status)
     {
-        Assert::assertEquals((int)$status, $this->response->getStatusCode());
+        Assert::assertEquals((int) $status, $this->response->getStatusCode());
     }
 }

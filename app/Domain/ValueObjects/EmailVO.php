@@ -3,11 +3,11 @@
 namespace App\Domain\ValueObjects;
 
 use App\Domain\Exceptions\EmailAddressException;
+use App\Domain\Exceptions\StringNotNullOrEmptyException;
 use App\Domain\Rules\EmailAddressRule;
+use App\Domain\Rules\StringNotNullOrEmptyRule;
 use App\Shared\BusinessRuleValidationException;
 use App\Shared\ValueObject;
-use App\Domain\Rules\StringNotNullOrEmptyRule;
-use App\Domain\Exceptions\StringNotNullOrEmptyException;
 
 class EmailVO extends ValueObject
 {

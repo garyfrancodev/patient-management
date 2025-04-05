@@ -8,12 +8,9 @@ class GenderVO
 
     private string $value;
 
-    /**
-     * @param string $value
-     */
     public function __construct(string $value)
     {
-        if (!in_array($value, self::ALLOWED)) {
+        if (! in_array($value, self::ALLOWED)) {
             throw new InvalidArgumentException("Invalid gender value: {$value}");
         }
 
@@ -24,5 +21,4 @@ class GenderVO
     {
         return $this->value;
     }
-
 }

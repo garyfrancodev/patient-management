@@ -17,27 +17,27 @@ use PHPUnit\Framework\Attributes\Ticket;
 class Patient extends AggregateRoot
 {
     private DobVO $dobVO;
+
     private EmailVO $emailVO;
+
     private FullNameVO $fullNameVO;
+
     private GenderVO $genderVO;
+
     private DniVO $dniVO;
+
     private string $phone;
+
     private string $userId;
+
     private array $addresses = [];
+
     private array $dietaryPreferences = [];
+
     private array $measurements = [];
+
     private array $tickets = [];
 
-    /**
-     * @param DobVO $dobVO
-     * @param EmailVO $emailVO
-     * @param FullNameVO $fullNameVO
-     * @param GenderVO $genderVO
-     * @param DniVO $dniVO
-     * @param string $phone
-     * @param string $userId
-     * @param ?string $id
-     */
     public function __construct(DobVO $dobVO, EmailVO $emailVO, FullNameVO $fullNameVO, GenderVO $genderVO, DniVO $dniVO, string $phone, string $userId, ?string $id)
     {
         parent::__construct($id);
@@ -51,7 +51,8 @@ class Patient extends AggregateRoot
         $this->domainEvents[] = new PatientCreated($emailVO->getEmail());
     }
 
-    public function addAddress(Address $address): void {
+    public function addAddress(Address $address): void
+    {
         $this->addresses[] = $address;
     }
 

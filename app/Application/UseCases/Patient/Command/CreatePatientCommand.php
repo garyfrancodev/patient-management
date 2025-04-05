@@ -7,22 +7,19 @@ use Carbon\Carbon;
 class CreatePatientCommand
 {
     private Carbon $dob;
+
     private string $dni;
+
     private string $email;
+
     private array $fullName;
+
     private string $gender;
+
     private string $phone;
+
     private string $userId;
 
-    /**
-     * @param Carbon $dob
-     * @param string $dni
-     * @param string $email
-     * @param array $fullName
-     * @param string $gender
-     * @param string $phone
-     * @param string $userId
-     */
     public function __construct(Carbon $dob, string $dni, string $email, array $fullName, string $gender, string $phone, string $userId)
     {
         $this->dob = $dob;
@@ -68,6 +65,4 @@ class CreatePatientCommand
     {
         return $this->userId;
     }
-
-
 }

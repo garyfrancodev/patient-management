@@ -7,9 +7,11 @@ use Tests\TestCase;
 
 class DummyCommand {}
 
-class DummyHandler {
-    public function handle($command): string {
-        return "handled";
+class DummyHandler
+{
+    public function handle($command): string
+    {
+        return 'handled';
     }
 }
 
@@ -22,14 +24,14 @@ class CommandBusTest extends TestCase
      */
     public function test_dispatch_returns_handler_result()
     {
-        $bus = new CommandBus();
-        $command = new DummyCommand();
-        $handler = new DummyHandler();
+        $bus = new CommandBus;
+        $command = new DummyCommand;
+        $handler = new DummyHandler;
 
         $bus->register(DummyCommand::class, $handler);
 
         $result = $bus->dispatch($command);
-        $this->assertEquals("handled", $result);
+        $this->assertEquals('handled', $result);
     }
 
     /**
@@ -38,10 +40,10 @@ class CommandBusTest extends TestCase
     public function test_dispatch_throws_exception_when_handler_not_registered()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage("No handler registered for command: " . DummyCommand::class);
+        $this->expectExceptionMessage('No handler registered for command: '.DummyCommand::class);
 
-        $bus = new CommandBus();
-        $command = new DummyCommand();
+        $bus = new CommandBus;
+        $command = new DummyCommand;
 
         $bus->dispatch($command);
     }
@@ -52,11 +54,11 @@ class CommandBusTest extends TestCase
     public function test_dispatch_throws_exception_when_handler_has_no_handle_method()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage("Handler for command " . DummyCommand::class . " must have a handle method.");
+        $this->expectExceptionMessage('Handler for command '.DummyCommand::class.' must have a handle method.');
 
-        $bus = new CommandBus();
-        $command = new DummyCommand();
-        $invalidHandler = new InvalidHandler();
+        $bus = new CommandBus;
+        $command = new DummyCommand;
+        $invalidHandler = new InvalidHandler;
 
         $bus->register(DummyCommand::class, $invalidHandler);
         $bus->dispatch($command);

@@ -23,7 +23,7 @@ class UpdatePatientRequestTest extends TestCase
             'dni' => 'B987654321',
             'phone' => '987654321',
             'dob' => '1990-12-31',
-            'gender' => 'female'
+            'gender' => 'female',
         ];
 
         // Simula una petición PUT a la ruta deseada.
@@ -55,7 +55,7 @@ class UpdatePatientRequestTest extends TestCase
             'dni' => 'B987654321',
             'phone' => '987654321',
             'dob' => 'not-a-date',      // Fecha en formato incorrecto.
-            'gender' => 'unknown'          // Valor no permitido.
+            'gender' => 'unknown',          // Valor no permitido.
         ];
 
         $request = UpdatePatientRequest::create('/api/v1/patient/12345', 'PUT', $data);

@@ -12,6 +12,7 @@ class PatientModel extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'patients';
+
     protected $keyType = 'string';
 
     public $incrementing = false;
@@ -25,13 +26,13 @@ class PatientModel extends Model
         'phone',
         'email',
         'full_name',
-        'dni'
+        'dni',
     ];
 
     protected function casts(): array
     {
         return [
-          'dob' => 'date'
+            'dob' => 'date',
         ];
     }
 

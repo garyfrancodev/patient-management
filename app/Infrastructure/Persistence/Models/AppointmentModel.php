@@ -12,7 +12,9 @@ class AppointmentModel extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'appointments';
+
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected $fillable = [
@@ -20,7 +22,7 @@ class AppointmentModel extends Model
         'patient_id',
         'nutritionist_id',
         'reason',
-        'status'
+        'status',
     ];
 
     public function patient(): BelongsTo

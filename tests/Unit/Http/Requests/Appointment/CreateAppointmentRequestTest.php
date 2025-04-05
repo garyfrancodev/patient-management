@@ -35,7 +35,7 @@ class CreateAppointmentRequestTest extends TestCase
 
         $data = [
             'reason' => 'Routine check-up',
-            'nutritionist_id' => '12345'
+            'nutritionist_id' => '12345',
         ];
 
         $request = CreateAppointmentRequest::create('/api/v1/appointment', 'POST', $data);

@@ -5,7 +5,9 @@ namespace src;
 class Person
 {
     private $firstName;
+
     private $lastName;
+
     private $alias;
 
     public function __construct(

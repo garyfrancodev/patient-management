@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class EloquentUnitOfWork implements UnitOfWork
 {
     private array $domainEvents = [];
+
     private int $transactionCount = 0;
 
     public function beginTransaction(): void
@@ -54,6 +55,7 @@ class EloquentUnitOfWork implements UnitOfWork
         try {
             $result = $callback();
             $this->commit();
+
             return $result;
         } catch (\Throwable $e) {
             $this->rollback();

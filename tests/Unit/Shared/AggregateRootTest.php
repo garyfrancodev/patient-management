@@ -19,6 +19,7 @@ class DummyAggregate extends AggregateRoot
         // Asumimos que la propiedad $id se define en la clase Entity (padre)
         $property = $reflection->getParentClass()->getProperty('id');
         $property->setAccessible(true);
+
         return $property->getValue($this);
     }
 
@@ -33,13 +34,13 @@ class DummyAggregate extends AggregateRoot
 }
 class AggregateRootTest extends TestCase
 {
-    public function testConstructorSetsId(): void
+    public function test_constructor_sets_id(): void
     {
         $dummy = new DummyAggregate('1234');
         $this->assertEquals('1234', $dummy->getId());
     }
 
-    public function testConstructDefaultSetsIdToNull(): void
+    public function test_construct_default_sets_id_to_null(): void
     {
         $dummy = new DummyAggregate('1234');
         $this->assertEquals('1234', $dummy->getId(), 'El ID se asignó en el constructor');

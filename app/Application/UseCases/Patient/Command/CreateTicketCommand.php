@@ -5,14 +5,11 @@ namespace App\Application\UseCases\Patient\Command;
 class CreateTicketCommand
 {
     private string $details;
+
     private string $patientId;
+
     private string $type;
 
-    /**
-     * @param string $details
-     * @param string $patientId
-     * @param string $type
-     */
     public function __construct(string $details, string $patientId, string $type)
     {
         $this->patientId = $patientId;

@@ -14,36 +14,36 @@ class AppointmentConsumerTest extends TestCase
     /**
      * Test para la solicitud GET /appointment/{id}
      */
-    public function testGetAppointmentById()
+    public function test_get_appointment_by_id()
     {
-        $id = "54dffac6-34ff-40c3-bfab-ba20e3a2ce7d";
-        $patientName = "John Doe";
-        $appointmentDate = "2025-02-10";
+        $id = '54dffac6-34ff-40c3-bfab-ba20e3a2ce7d';
+        $patientName = 'John Doe';
+        $appointmentDate = '2025-02-10';
 
-        $request = new ConsumerRequest();
-        $request->setMethod("GET")
-            ->setPath("/appointment/" . $id)
-            ->addHeader("Accept", "application/json");
+        $request = new ConsumerRequest;
+        $request->setMethod('GET')
+            ->setPath('/appointment/'.$id)
+            ->addHeader('Accept', 'application/json');
 
-        $response = new ProviderResponse();
+        $response = new ProviderResponse;
         $response->setStatus(200)
-            ->addHeader("Content-Type", "application/json")
+            ->addHeader('Content-Type', 'application/json')
             ->setBody([
-                "id" => $id,
-                "patient_name" => $patientName,
-                "appointment_date" => $appointmentDate
+                'id' => $id,
+                'patient_name' => $patientName,
+                'appointment_date' => $appointmentDate,
             ]);
 
-        $config = new MockServerEnvConfig();
+        $config = new MockServerEnvConfig;
 
         $builder = new InteractionBuilder($config);
         $builder
-            ->given('AppointmentModel exists with id ' . $id)
+            ->given('AppointmentModel exists with id '.$id)
             ->uponReceiving('A GET request to /appointment/{id}')
             ->with($request)
             ->willRespondWith($response);
 
-        $client = new Client(["base_uri" => $config->getBaseUri()]);
+        $client = new Client(['base_uri' => $config->getBaseUri()]);
         $response = $client->request('GET', "/appointment/{$id}");
 
         $this->assertTrue($builder->verify());
@@ -56,30 +56,30 @@ class AppointmentConsumerTest extends TestCase
     /**
      * Test para la solicitud POST /patient/
      */
-    public function testCreatePatient()
+    public function test_create_patient()
     {
-        $firstName = "Jane";
-        $lastName = "Smith";
-        $id = "abc-123-def-456";
+        $firstName = 'Jane';
+        $lastName = 'Smith';
+        $id = 'abc-123-def-456';
 
-        $request = new ConsumerRequest();
-        $request->setMethod("POST")
-            ->setPath("/patient/")
-            ->addHeader("Content-Type", "application/json")
+        $request = new ConsumerRequest;
+        $request->setMethod('POST')
+            ->setPath('/patient/')
+            ->addHeader('Content-Type', 'application/json')
             ->setBody([
                 'first_name' => $firstName,
-                'last_name' => $lastName
+                'last_name' => $lastName,
             ]);
 
-        $response = new ProviderResponse();
+        $response = new ProviderResponse;
         $response->setStatus(201)
-            ->addHeader("Content-Type", "application/json")
+            ->addHeader('Content-Type', 'application/json')
             ->setBody([
                 'id' => $id,
                 'first_name' => $firstName,
-                'last_name' => $lastName
+                'last_name' => $lastName,
             ]);
-        $config = new MockServerEnvConfig();
+        $config = new MockServerEnvConfig;
 
         $builder = new InteractionBuilder($config);
         $builder
@@ -88,12 +88,12 @@ class AppointmentConsumerTest extends TestCase
             ->with($request)
             ->willRespondWith($response);
 
-        $client = new Client(["base_uri" => $config->getBaseUri()]);
-        $response = $client->request('POST', "/patient/", [
+        $client = new Client(['base_uri' => $config->getBaseUri()]);
+        $response = $client->request('POST', '/patient/', [
             'json' => [
                 'first_name' => $firstName,
-                'last_name' => $lastName
-            ]
+                'last_name' => $lastName,
+            ],
         ]);
 
         $this->assertTrue($builder->verify());

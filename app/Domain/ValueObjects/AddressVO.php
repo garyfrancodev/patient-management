@@ -5,13 +5,15 @@ namespace App\Domain\ValueObjects;
 class AddressVO
 {
     private string $street;
+
     private string $city;
+
     private string $postalCode;
 
     public function __construct(string $street, string $city, string $postalCode)
     {
         if (empty($street) || empty($city) || empty($postalCode)) {
-            throw new \InvalidArgumentException("Street, city, and postal code cannot be empty.");
+            throw new \InvalidArgumentException('Street, city, and postal code cannot be empty.');
         }
 
         $this->street = $street;

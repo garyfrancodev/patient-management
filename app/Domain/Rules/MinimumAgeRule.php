@@ -10,16 +10,13 @@ class MinimumAgeRule implements BusinessRule
     private Carbon $value;
 
     protected const MINIMUM_AGE = 18;
+
     protected const MESSAGE = 'Debes ser mayor de edad';
 
-    /**
-     * @param Carbon $value
-     */
     public function __construct(Carbon $value)
     {
         $this->value = $value;
     }
-
 
     public function isValid(): bool
     {

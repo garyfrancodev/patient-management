@@ -12,19 +12,21 @@ class TicketModel extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'tickets';
+
     protected $keyType = 'string';
+
     public $incrementing = false;
+
     protected $fillable = [
         'id',
         'patient_id',
         'details',
         'type',
-        'status'
+        'status',
     ];
 
     public function patient(): BelongsTo
     {
         return $this->belongsTo(PatientModel::class, 'patient_id');
     }
-
 }

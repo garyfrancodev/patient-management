@@ -32,7 +32,7 @@ class PatientRepositoryImpl implements PatientRepository
             'gender' => $entity->getGender()->getValue(),
             'phone' => $entity->getPhone(),
             'dni' => $entity->getDni()->getDni(),
-            'email' => $entity->getEmail()->getEmail()
+            'email' => $entity->getEmail()->getEmail(),
         ];
 
         return PatientModel::create($data);
@@ -49,7 +49,7 @@ class PatientRepositoryImpl implements PatientRepository
             'id' => $entity->getId(),
             'patient_id' => $entity->getPatientId(),
             'address' => $entity->getAddressVO()->getValue(),
-            'gps' => $entity->getGpsVO()->toJson()
+            'gps' => $entity->getGpsVO()->toJson(),
         ];
 
         return AddressModel::create($data);
@@ -60,7 +60,7 @@ class PatientRepositoryImpl implements PatientRepository
         $data = [
             'id' => $entity->getId(),
             'patient_id' => $entity->getPatientId(),
-            'preference' => $entity->getPreference()
+            'preference' => $entity->getPreference(),
         ];
 
         return DietaryPreferenceModel::create($data);
@@ -88,7 +88,7 @@ class PatientRepositoryImpl implements PatientRepository
             'patient_id' => $entity->getPatientId(),
             'type' => $entity->getType(),
             'details' => $entity->getDetails(),
-            'status' => $entity->getStatus()
+            'status' => $entity->getStatus(),
         ];
 
         return TicketModel::create($data);

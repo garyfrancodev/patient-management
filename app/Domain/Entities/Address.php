@@ -10,15 +10,11 @@ use App\Shared\Entity;
 class Address extends Entity
 {
     private string $patientId;
+
     private AddressVO $addressVO;
+
     private GpsVO $gpsVO;
 
-    /**
-     * @param string $patientId
-     * @param AddressVO $addressVO
-     * @param GpsVO $gpsVO
-     * @param ?string $id
-     */
     public function __construct(string $patientId, AddressVO $addressVO, GpsVO $gpsVO, ?string $id)
     {
         parent::__construct($id);

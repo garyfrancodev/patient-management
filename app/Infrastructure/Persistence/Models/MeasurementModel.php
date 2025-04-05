@@ -12,8 +12,11 @@ class MeasurementModel extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'measurements';
+
     protected $keyType = 'string';
+
     public $incrementing = false;
+
     protected $fillable = [
         'id',
         'patient_id',
@@ -21,7 +24,7 @@ class MeasurementModel extends Model
         'height',
         'weight',
         'body_fat',
-        'notes'
+        'notes',
     ];
 
     public function patient(): BelongsTo

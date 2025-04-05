@@ -11,7 +11,7 @@ class NotifyNutritionistWhenCreatedAppointment
      */
     public function handle(CreatedAppointment $event)
     {
-        error_log("Listener ejecutado: CreatedAppointment");
-        //TODO: send email
+        error_log('Listener ejecutado: CreatedAppointment');
+        // TODO: send email
     }
 }

@@ -10,18 +10,14 @@ use Illuminate\Http\JsonResponse;
 class CreatePatientCommandHandler
 {
     private PatientRepository $patientRepository;
+
     private UnitOfWork $unitOfWork;
 
-    /**
-     * @param PatientRepository $patientRepository
-     * @param UnitOfWork $unitOfWork
-     */
     public function __construct(PatientRepository $patientRepository, UnitOfWork $unitOfWork)
     {
         $this->patientRepository = $patientRepository;
         $this->unitOfWork = $unitOfWork;
     }
-
 
     public function handle(CreatePatientCommand $command): JsonResponse
     {
@@ -42,6 +38,6 @@ class CreatePatientCommandHandler
             $this->unitOfWork->addDomainEvents($patient->getDomainEvents());
         });
 
-        return response()->json(["data" => $patientModel]);
+        return response()->json(['data' => $patientModel]);
     }
 }

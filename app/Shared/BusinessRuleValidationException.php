@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Shared;
+
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -23,7 +24,7 @@ class BusinessRuleValidationException extends Exception
     public function getMessageResponse(): JsonResponse
     {
         return response()->json([
-            'message' => $this->getMessage()
+            'message' => $this->getMessage(),
         ], 400);
     }
 }

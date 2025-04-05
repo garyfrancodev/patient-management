@@ -9,16 +9,13 @@ use App\Shared\AggregateRoot;
 class Appointment extends AggregateRoot
 {
     private string $patientId;
+
     private string $nutritionistId;
+
     private ReasonVO $reasonVO;
+
     private string $status;
 
-    /**
-     * @param string $patientId
-     * @param string $nutritionistId
-     * @param ReasonVO $reasonVO
-     * @param string $status
-     */
     public function __construct(string $patientId, string $nutritionistId, ReasonVO $reasonVO, string $status, ?string $id = null)
     {
         parent::__construct($id);
@@ -26,10 +23,11 @@ class Appointment extends AggregateRoot
         $this->nutritionistId = $nutritionistId;
         $this->reasonVO = $reasonVO;
         $this->status = $status;
-        $this->addDomainEvent(new CreatedAppointment());
+        $this->addDomainEvent(new CreatedAppointment);
     }
 
-    public function updateReason($reason) {
+    public function updateReason($reason)
+    {
         $this->reasonVO = new ReasonVO($reason);
     }
 

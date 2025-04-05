@@ -27,10 +27,13 @@ class PatientController extends Controller
      *     tags={"Patients"},
      *     summary="Create a new patient",
      *     description="Handles the creation of a new patient.",
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"user_id"},
+     *
      *             @OA\Property(property="user_id", type="string", example="12345", description="The user ID associated with the patient."),
      *             @OA\Property(property="full_name", type="object",
      *                 @OA\Property(property="first_name", type="string", example="John"),
@@ -43,10 +46,13 @@ class PatientController extends Controller
      *             @OA\Property(property="gender", type="string", example="male", enum={"male", "female", "other"})
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="Patient created successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="user_id", type="string", example="12345"),
      *             @OA\Property(property="full_name", type="object",
      *                 @OA\Property(property="first_name", type="string", example="John"),
@@ -55,6 +61,7 @@ class PatientController extends Controller
      *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Invalid input data"
@@ -63,7 +70,7 @@ class PatientController extends Controller
      */
     public function store(CreatePatientRequest $request): JsonResponse
     {
-        error_log("hey bro");
+        error_log('hey bro');
         $data = $request->validated();
 
         $dob = Carbon::createFromFormat('Y-m-d', $data['dob']);
@@ -88,13 +95,17 @@ class PatientController extends Controller
      *     summary="Obtiene todos los pacientes registrados.",
      *     description="Retorna una lista de pacientes.",
      *     operationId="getAllPatients",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Lista de pacientes obtenida exitosamente.",
+     *
      *         @OA\JsonContent(
      *             type="array",
+     *
      *             @OA\Items(
      *                 type="object",
+     *
      *                 @OA\Property(property="id", type="string", example="1"),
      *                 @OA\Property(property="fullName", type="string", example="Juan Pérez"),
      *                 @OA\Property(property="email", type="string", example="juan.perez@email.com"),
@@ -106,6 +117,7 @@ class PatientController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Solicitud incorrecta",
@@ -118,7 +130,8 @@ class PatientController extends Controller
      */
     public function index(): JsonResponse
     {
-        $command = new GetAllPatientsQuery();
+        $command = new GetAllPatientsQuery;
+
         return $this->commandBus->dispatch($command);
     }
 
@@ -128,16 +141,21 @@ class PatientController extends Controller
      *     tags={"Patients"},
      *     summary="Create a new address for patient",
      *     description="Handles the creation of a new address.",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID del paciente",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *      ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="address", type="object",
      *                 @OA\Property(property="street", type="string", example="Plan 3000"),
      *                 @OA\Property(property="city", type="string", example="Santa Cruz"),
@@ -149,10 +167,13 @@ class PatientController extends Controller
      *              )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="PatientModel AddressModel created successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="user_id", type="string", example="12345"),
      *             @OA\Property(property="full_name", type="object",
      *                 @OA\Property(property="first_name", type="string", example="John"),
@@ -161,6 +182,7 @@ class PatientController extends Controller
      *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Invalid input data"
@@ -175,6 +197,7 @@ class PatientController extends Controller
         $patientId = $addAddressRequest->route('id');
 
         $command = new AddAddressCommand($address, $gps, $patientId);
+
         return $this->commandBus->dispatch($command);
     }
 
@@ -184,23 +207,31 @@ class PatientController extends Controller
      *     tags={"Patients"},
      *     summary="Create a new address for patient",
      *     description="Handles the creation of a new address.",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID del paciente",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *      ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
+     *
      *           @OA\Property(property="preference", type="string", example="lacteos")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="PatientModel AddressModel created successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="user_id", type="string", example="12345"),
      *             @OA\Property(property="full_name", type="object",
      *                 @OA\Property(property="first_name", type="string", example="John"),
@@ -209,6 +240,7 @@ class PatientController extends Controller
      *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Invalid input data"
@@ -223,6 +255,7 @@ class PatientController extends Controller
         $preference = $data['preference'];
 
         $command = new AddDietaryPreferenceCommand($patientId, $preference);
+
         return $this->commandBus->dispatch($command);
     }
 
@@ -232,16 +265,21 @@ class PatientController extends Controller
      *     tags={"Patients"},
      *     summary="Create a new address for patient",
      *     description="Handles the creation of a new address.",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID del paciente",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *      ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
+     *
      *           @OA\Property(property="consultation_id", type="string", example="123456"),
      *           @OA\Property(property="height", type="numeric", example="40.0"),
      *           @OA\Property(property="weight", type="numeric", example="30.0"),
@@ -249,10 +287,13 @@ class PatientController extends Controller
      *           @OA\Property(property="notes", type="string", example="this notes")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="PatientModel AddressModel created successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="user_id", type="string", example="12345"),
      *             @OA\Property(property="full_name", type="object",
      *                 @OA\Property(property="first_name", type="string", example="John"),
@@ -261,6 +302,7 @@ class PatientController extends Controller
      *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Invalid input data"
@@ -278,6 +320,7 @@ class PatientController extends Controller
         $notes = $data['notes'];
 
         $command = new AddMeasurementCommand($patientId, $consultationId, $height, $weight, $bodyFat, $notes);
+
         return $this->commandBus->dispatch($command);
     }
 
@@ -287,24 +330,32 @@ class PatientController extends Controller
      *     tags={"Patients"},
      *     summary="Create a new ticket",
      *     description="Handles the creation of a new address.",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         description="ID del paciente",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *      ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
+     *
      *           @OA\Property(property="type", type="string", example="support"),
      *           @OA\Property(property="details", type="string", example="test for ticket"),
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="PatientModel AddressModel created successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="user_id", type="string", example="12345"),
      *             @OA\Property(property="full_name", type="object",
      *                 @OA\Property(property="first_name", type="string", example="John"),
@@ -313,6 +364,7 @@ class PatientController extends Controller
      *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Invalid input data"
@@ -328,6 +380,7 @@ class PatientController extends Controller
         $details = $data['details'];
 
         $command = new CreateTicketCommand($details, $patientId, $type);
+
         return $this->commandBus->dispatch($command);
     }
 }

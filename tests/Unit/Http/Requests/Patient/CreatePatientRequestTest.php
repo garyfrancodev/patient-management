@@ -11,16 +11,16 @@ class CreatePatientRequestTest extends TestCase
     public function test_valid_data_passes_validation()
     {
         $data = [
-            'user_id'   => '12345',
+            'user_id' => '12345',
             'full_name' => [
                 'first_name' => 'John',
-                'last_name'  => 'Doe',
+                'last_name' => 'Doe',
             ],
-            'email'     => 'john.doe@example.com',
-            'dni'       => 'A123456789',
-            'phone'     => '123456789',
-            'dob'       => '2000-05-15',
-            'gender'    => 'male',
+            'email' => 'john.doe@example.com',
+            'dni' => 'A123456789',
+            'phone' => '123456789',
+            'dob' => '2000-05-15',
+            'gender' => 'male',
         ];
 
         $request = CreatePatientRequest::create('/api/v1/patient', 'POST', $data);
@@ -39,15 +39,15 @@ class CreatePatientRequestTest extends TestCase
         $this->expectException(HttpResponseException::class);
 
         $data = [
-            'user_id'   => '12345',
+            'user_id' => '12345',
             'full_name' => [
-                'first_name' => 'John'
+                'first_name' => 'John',
             ],
-            'email'     => 'john.doe@example.com',
-            'dni'       => 'A123456789',
-            'phone'     => '123456789',
-            'dob'       => '2000-05-15',
-            'gender'    => 'male',
+            'email' => 'john.doe@example.com',
+            'dni' => 'A123456789',
+            'phone' => '123456789',
+            'dob' => '2000-05-15',
+            'gender' => 'male',
         ];
 
         $request = CreatePatientRequest::create('/api/v1/patient', 'POST', $data);

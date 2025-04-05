@@ -30,4 +30,3 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{id}', [AppointmentController::class, 'destroy']);
     });
 });
-

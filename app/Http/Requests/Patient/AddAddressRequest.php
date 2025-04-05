@@ -30,7 +30,7 @@ class AddAddressRequest extends FormRequest
             'address.postal_code' => 'required|string',
             'gps' => 'required|array',
             'gps.latitude' => 'required|numeric',
-            'gps.longitude' => 'required|numeric'
+            'gps.longitude' => 'required|numeric',
         ];
     }
 
@@ -39,7 +39,7 @@ class AddAddressRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'success' => false,
             'message' => 'Validation errors',
-            'data' => $validator->errors()
+            'data' => $validator->errors(),
         ]));
     }
 }

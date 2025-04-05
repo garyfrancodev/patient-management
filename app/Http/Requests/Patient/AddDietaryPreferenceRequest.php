@@ -22,7 +22,7 @@ class AddDietaryPreferenceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'preference' => 'required|string'
+            'preference' => 'required|string',
         ];
     }
 }

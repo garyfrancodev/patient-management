@@ -10,12 +10,9 @@ use Illuminate\Http\JsonResponse;
 class AddDietaryPreferenceCommandHandler
 {
     private PatientRepository $patientRepository;
+
     private UnitOfWork $unitOfWork;
 
-    /**
-     * @param PatientRepository $patientRepository
-     * @param UnitOfWork $unitOfWork
-     */
     public function __construct(PatientRepository $patientRepository, UnitOfWork $unitOfWork)
     {
         $this->patientRepository = $patientRepository;
@@ -28,8 +25,8 @@ class AddDietaryPreferenceCommandHandler
         $preference = $command->getPreference();
 
         $data = [
-            "patient_id" => $patientId,
-            "preference" => $preference,
+            'patient_id' => $patientId,
+            'preference' => $preference,
         ];
 
         $address = DietaryPreferenceFactory::create($data);
@@ -41,6 +38,6 @@ class AddDietaryPreferenceCommandHandler
             $this->unitOfWork->addDomainEvents($address->getDomainEvents());
         });
 
-        return response()->json(["data" => $model]);
+        return response()->json(['data' => $model]);
     }
 }

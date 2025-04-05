@@ -21,13 +21,13 @@ class CommandBus
     {
         $commandClass = get_class($command);
 
-        if (!isset($this->handlers[$commandClass])) {
+        if (! isset($this->handlers[$commandClass])) {
             throw new \Exception("No handler registered for command: {$commandClass}");
         }
 
         $handler = $this->handlers[$commandClass];
 
-        if (!method_exists($handler, 'handle')) {
+        if (! method_exists($handler, 'handle')) {
             throw new \Exception("Handler for command {$commandClass} must have a handle method.");
         }
 

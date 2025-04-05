@@ -3,8 +3,8 @@
 namespace Tests\Unit\Http\Requests\Patient;
 
 use App\Http\Requests\Patient\AddAddressRequest;
-use Tests\TestCase;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Tests\TestCase;
 
 class AddAddressRequestTest extends TestCase
 {
@@ -12,14 +12,14 @@ class AddAddressRequestTest extends TestCase
     {
         $data = [
             'address' => [
-                'street'      => '123 Main St',
-                'city'        => 'Ciudad',
-                'postal_code' => '12345'
+                'street' => '123 Main St',
+                'city' => 'Ciudad',
+                'postal_code' => '12345',
             ],
             'gps' => [
-                'latitude'  => 10.123,
-                'longitude' => -20.456
-            ]
+                'latitude' => 10.123,
+                'longitude' => -20.456,
+            ],
         ];
 
         $request = AddAddressRequest::create('/api/v1/patient/1/address', 'POST', $data);
@@ -39,8 +39,8 @@ class AddAddressRequestTest extends TestCase
 
         $data = [
             'address' => [
-                'city'        => 'Ciudad',
-                'postal_code' => '12345'
+                'city' => 'Ciudad',
+                'postal_code' => '12345',
             ],
         ];
 

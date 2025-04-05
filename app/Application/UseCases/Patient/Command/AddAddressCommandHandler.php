@@ -10,25 +10,21 @@ use Illuminate\Http\JsonResponse;
 class AddAddressCommandHandler
 {
     private PatientRepository $patientRepository;
+
     private UnitOfWork $unitOfWork;
 
-    /**
-     * @param PatientRepository $patientRepository
-     * @param UnitOfWork $unitOfWork
-     */
     public function __construct(PatientRepository $patientRepository, UnitOfWork $unitOfWork)
     {
         $this->patientRepository = $patientRepository;
         $this->unitOfWork = $unitOfWork;
     }
 
-
     public function handle(AddAddressCommand $command): JsonResponse
     {
         $data = [
-            "patient_id" => $command->getPatientId(),
-            "address" => $command->getAddress(),
-            "gps" => $command->getGps()
+            'patient_id' => $command->getPatientId(),
+            'address' => $command->getAddress(),
+            'gps' => $command->getGps(),
         ];
 
         $address = AddressFactory::create($data);
@@ -40,6 +36,6 @@ class AddAddressCommandHandler
             $this->unitOfWork->addDomainEvents($address->getDomainEvents());
         });
 
-        return response()->json(["data" => $model]);
+        return response()->json(['data' => $model]);
     }
 }

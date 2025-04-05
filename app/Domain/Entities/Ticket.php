@@ -7,16 +7,13 @@ use App\Shared\Entity;
 class Ticket extends Entity
 {
     private string $details;
+
     private string $patientId;
+
     private string $status;
+
     private string $type;
 
-    /**
-     * @param string $details
-     * @param string $patientId
-     * @param string $status
-     * @param string $type
-     */
     public function __construct(string $details, string $patientId, string $status, string $type, ?string $id = null)
     {
         parent::__construct($id);

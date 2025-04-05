@@ -15,7 +15,7 @@ class AddressCreated extends DomainEvent
     {
         parent::__construct();
         $this->patientId = $patientId;
-        error_log("added AddressCreatedEvent");
+        error_log('added AddressCreatedEvent');
     }
 
     public function getPatientId(): string

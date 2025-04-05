@@ -3,12 +3,12 @@
 namespace App\Domain\Factories;
 
 use App\Domain\Aggregates\Appointment;
-use App\Domain\Aggregates\Patient;
 use App\Domain\ValueObjects\ReasonVO;
 
 class AppointmentFactory
 {
-    public static function create(array $data): Appointment {
+    public static function create(array $data): Appointment
+    {
         $patientId = $data['patient_id'];
         $nutritionistId = $data['nutritionist_id'];
         $reason = $data['reason'];
@@ -17,5 +17,4 @@ class AppointmentFactory
 
         return new Appointment($patientId, $nutritionistId, $reasonVO, $status);
     }
-
 }

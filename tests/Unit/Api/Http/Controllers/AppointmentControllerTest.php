@@ -13,12 +13,12 @@ use Tests\TestCase;
 
 class AppointmentControllerTest extends TestCase
 {
-    public function test_store_dispatches_createAppointmentCommand()
+    public function test_store_dispatches_create_appointment_command()
     {
         $data = [
             'nutritionist_id' => '12345',
-            'patient_id'      => 'faeac40d-a9c0-4c4a-aa6b-ebb210afb589',
-            'reason'          => 'catering',
+            'patient_id' => 'faeac40d-a9c0-4c4a-aa6b-ebb210afb589',
+            'reason' => 'catering',
         ];
 
         $createAppointmentRequest = $this->getMockBuilder(CreateAppointmentRequest::class)
@@ -35,7 +35,7 @@ class AppointmentControllerTest extends TestCase
         $commandBusMock = $this->createMock(CommandBus::class);
         $commandBusMock->expects($this->once())
             ->method('dispatch')
-            ->with($this->callback(function ($command) use ($data) {
+            ->with($this->callback(function ($command) {
                 return $command instanceof CreateAppointmentCommand;
             }))
             ->willReturn($expectedResponse);
@@ -47,7 +47,7 @@ class AppointmentControllerTest extends TestCase
         $this->assertSame($expectedResponse, $actualResponse);
     }
 
-    public function test_getAppointmentsByNutritionistIdQuery_dispatches_getAppointmentsByNutritionistIdQuery()
+    public function test_get_appointments_by_nutritionist_id_query_dispatches_get_appointments_by_nutritionist_id_query()
     {
         $nutritionistId = '12345';
         $request = new Request(['nutritionist_id' => $nutritionistId]);
@@ -57,7 +57,7 @@ class AppointmentControllerTest extends TestCase
         $commandBusMock = $this->createMock(CommandBus::class);
         $commandBusMock->expects($this->once())
             ->method('dispatch')
-            ->with($this->callback(function ($command) use ($nutritionistId) {
+            ->with($this->callback(function ($command) {
                 return $command instanceof GetAppointmentsByNutritionistIdQuery;
             }))
             ->willReturn($expectedResponse);

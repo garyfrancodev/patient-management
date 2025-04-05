@@ -24,9 +24,9 @@ class CreateAppointmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'reason'           => 'required|string',
-            'nutritionist_id'  => 'required|string',
-            'patient_id'       => 'required|string'
+            'reason' => 'required|string',
+            'nutritionist_id' => 'required|string',
+            'patient_id' => 'required|string',
         ];
     }
 
@@ -35,7 +35,7 @@ class CreateAppointmentRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'success' => false,
             'message' => 'Validation errors',
-            'data' => $validator->errors()
+            'data' => $validator->errors(),
         ]));
     }
 }

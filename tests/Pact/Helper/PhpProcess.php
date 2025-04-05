@@ -7,6 +7,7 @@ use Symfony\Component\Process\Process;
 class PhpProcess
 {
     private Process $process;
+
     private int $port;
 
     public function __construct(string $publicPath)

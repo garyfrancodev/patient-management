@@ -11,9 +11,6 @@ class DobVO extends ValueObject
 {
     private Carbon $value;
 
-    /**
-     * @param Carbon $value
-     */
     public function __construct(Carbon $value)
     {
         $this->checkRule(new BirthDateException(new MinimumAgeRule($value)));

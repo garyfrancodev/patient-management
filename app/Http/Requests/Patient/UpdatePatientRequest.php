@@ -32,7 +32,7 @@ class UpdatePatientRequest extends FormRequest
             'dni' => 'required|string',
             'phone' => 'required|string',
             'dob' => 'required|date_format:Y-m-d',
-            'gender' => 'required|in:male,female,other'
+            'gender' => 'required|in:male,female,other',
         ];
     }
 
@@ -41,7 +41,7 @@ class UpdatePatientRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'success' => false,
             'message' => 'Validation errors',
-            'data'    => $validator->errors()
+            'data' => $validator->errors(),
         ]));
     }
 }

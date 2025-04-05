@@ -14,7 +14,7 @@ class PactVerifyPatientStoreTest extends TestCase
 
     protected function setUp(): void
     {
-        $publicPath = __DIR__ . '/../../public'; // Ajusta la ruta según tu proyecto
+        $publicPath = __DIR__.'/../../public'; // Ajusta la ruta según tu proyecto
         $this->process = new PhpProcess($publicPath);
         $this->process->start();
     }
@@ -24,9 +24,9 @@ class PactVerifyPatientStoreTest extends TestCase
         $this->process->stop();
     }
 
-    public function testPactVerifyProvider(): void
+    public function test_pact_verify_provider(): void
     {
-        $config = new VerifierConfig();
+        $config = new VerifierConfig;
 
         $config->getProviderInfo()
             ->setName('LaravelPatientProvider')
@@ -34,14 +34,14 @@ class PactVerifyPatientStoreTest extends TestCase
             ->setPort($this->process->getPort());
 
         $config->getProviderState();
-//            ->setStateChangeUrl(new Uri(sprintf('http://localhost:%d/pact-change-state', $this->process->getPort())));
+        //            ->setStateChangeUrl(new Uri(sprintf('http://localhost:%d/pact-change-state', $this->process->getPort())));
 
         if ($logLevel = getenv('PACT_LOGLEVEL')) {
             $config->setLogLevel($logLevel);
         }
 
         $verifier = new Verifier($config);
-        $verifier->addFile(__DIR__ . '/../../../pacts/LaravelPatientConsumer-LaravelPatientProvider.json');
+        $verifier->addFile(__DIR__.'/../../../pacts/LaravelPatientConsumer-LaravelPatientProvider.json');
 
         $verifyResult = $verifier->verify();
 

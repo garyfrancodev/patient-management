@@ -21,16 +21,16 @@ use Tests\TestCase;
 
 class PatientControllerTest extends TestCase
 {
-    public function test_store_dispatches_createPatientCommand()
+    public function test_store_dispatches_create_patient_command()
     {
         $data = [
-            'user_id'   => '12345',
+            'user_id' => '12345',
             'full_name' => ['first_name' => 'John', 'last_name' => 'Doe'],
-            'email'     => 'john.doe@example.com',
-            'dni'       => 'A123456789',
-            'phone'     => '123456789',
-            'dob'       => '2000-05-15',
-            'gender'    => 'male'
+            'email' => 'john.doe@example.com',
+            'dni' => 'A123456789',
+            'phone' => '123456789',
+            'dob' => '2000-05-15',
+            'gender' => 'male',
         ];
 
         $createPatientRequest = $this->getMockBuilder(CreatePatientRequest::class)
@@ -48,10 +48,11 @@ class PatientControllerTest extends TestCase
         $commandBusMock->expects($this->once())
             ->method('dispatch')
             ->with($this->callback(function ($command) use ($data) {
-                if (!$command instanceof CreatePatientCommand) {
+                if (! $command instanceof CreatePatientCommand) {
                     return false;
                 }
                 $expectedDob = Carbon::createFromFormat('Y-m-d', $data['dob']);
+
                 return true;
             }))
             ->willReturn($expectedResponse);
@@ -63,7 +64,7 @@ class PatientControllerTest extends TestCase
         $this->assertSame($expectedResponse, $actualResponse);
     }
 
-    public function test_index_dispatches_getAllPatientsQuery()
+    public function test_index_dispatches_get_all_patients_query()
     {
         $expectedResponse = new JsonResponse(['patients' => []], 200);
 
@@ -82,16 +83,16 @@ class PatientControllerTest extends TestCase
         $this->assertSame($expectedResponse, $actualResponse);
     }
 
-    public function test_createPatientAddress_dispatches_addAddressCommand()
+    public function test_create_patient_address_dispatches_add_address_command()
     {
         $data = [
             'address' => [
-                'street'      => 'Plan 3000',
-                'city'        => 'Santa Cruz',
+                'street' => 'Plan 3000',
+                'city' => 'Santa Cruz',
                 'postal_code' => '591',
             ],
             'gps' => [
-                'latitude'  => 40.753,
+                'latitude' => 40.753,
                 'longitude' => -73.983,
             ],
         ];
@@ -124,10 +125,10 @@ class PatientControllerTest extends TestCase
         $this->assertSame($expectedResponse, $actualResponse);
     }
 
-    public function test_createPatientDietaryPreference_dispatches_addDietaryPreferenceCommand(): void
+    public function test_create_patient_dietary_preference_dispatches_add_dietary_preference_command(): void
     {
         $data = [
-            'preference' => 'Vegetarian'
+            'preference' => 'Vegetarian',
         ];
 
         // Creamos un partial mock del request, simulando los métodos validated() y route()
@@ -162,14 +163,14 @@ class PatientControllerTest extends TestCase
         $this->assertSame($expectedResponse, $actualResponse);
     }
 
-    public function test_createPatientMeasurement_dispatches_addMeasurementCommand(): void
+    public function test_create_patient_measurement_dispatches_add_measurement_command(): void
     {
         $data = [
             'consultation_id' => 'cons-001',
-            'height'          => 170,
-            'weight'          => 65,
-            'body_fat'        => 20,
-            'notes'           => 'Measurement notes',
+            'height' => 170,
+            'weight' => 65,
+            'body_fat' => 20,
+            'notes' => 'Measurement notes',
         ];
 
         // Creamos un partial mock del AddMeasurementRequest para simular los métodos validated() y route('id')
@@ -205,10 +206,10 @@ class PatientControllerTest extends TestCase
         $this->assertSame($expectedResponse, $actualResponse);
     }
 
-    public function test_createPatientTicket_dispatches_createTicketCommand(): void
+    public function test_create_patient_ticket_dispatches_create_ticket_command(): void
     {
         $data = [
-            'type'    => 'complaint',
+            'type' => 'complaint',
             'details' => 'Ticket details info',
         ];
 

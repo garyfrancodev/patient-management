@@ -4,30 +4,27 @@ namespace Tests\Unit\Application\UseCases\Patient;
 
 use App\Application\UseCases\Patient\Command\AddAddressCommand;
 use App\Application\UseCases\Patient\Command\AddAddressCommandHandler;
-use App\Application\UseCases\Patient\Command\CreatePatientCommand;
-use App\Application\UseCases\Patient\Command\CreatePatientCommandHandler;
 use App\Domain\Repositories\PatientRepository;
 use App\Infrastructure\Persistence\Models\PatientModel;
 use App\Shared\UnitOfWork;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Tests\TestCase;
 use Mockery;
+use Tests\TestCase;
 
 class AddAddressCommandHandlerTest extends TestCase
 {
     public function test_handle_creates_patient_and_returns_json_response()
     {
         $address = [
-            "street" => "Plan 3000",
-            "city" => "Santa Cruz",
-            "postal_code" => "591"
+            'street' => 'Plan 3000',
+            'city' => 'Santa Cruz',
+            'postal_code' => '591',
         ];
         $gps = [
-            "latitude" => 40.753,
-            "longitude" => -73.983
+            'latitude' => 40.753,
+            'longitude' => -73.983,
         ];
-        $patientId = "faeac40d-a9c0-4c4a-aa6b-ebb210afb589";
+        $patientId = 'faeac40d-a9c0-4c4a-aa6b-ebb210afb589';
         $command = new AddAddressCommand($address, $gps, $patientId);
 
         $patientModelMock = Mockery::mock(PatientModel::class);
@@ -53,7 +50,7 @@ class AddAddressCommandHandlerTest extends TestCase
 
         $mockUnitOfWork->shouldReceive('execute')
             ->once()
-            ->andReturnUsing(function ($callback) use ($mockRepository) {
+            ->andReturnUsing(function ($callback) {
                 return $callback();
             });
 

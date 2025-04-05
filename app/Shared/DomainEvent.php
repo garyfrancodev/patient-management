@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 abstract class DomainEvent
 {
     protected string $id;
+
     protected Carbon $occurredOn;
 
     public function __construct()

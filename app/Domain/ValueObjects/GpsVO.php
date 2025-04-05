@@ -8,12 +8,9 @@ class GpsVO extends ValueObject
 {
     private array $coordinates;
 
-    /**
-     * @param array $coordinates
-     */
     public function __construct(array $coordinates)
     {
-        if (!isset($coordinates['latitude']) || !isset($coordinates['longitude'])) {
+        if (! isset($coordinates['latitude']) || ! isset($coordinates['longitude'])) {
             throw new InvalidArgumentException('Las coordenadas GPS deben tener latitud y longitud.');
         }
 

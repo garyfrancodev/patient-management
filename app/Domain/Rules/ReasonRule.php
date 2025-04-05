@@ -7,6 +7,7 @@ use App\Shared\BusinessRule;
 class ReasonRule implements BusinessRule
 {
     private string $value;
+
     private const VALID_REASONS = ['nutritional_advice', 'catering'];
 
     protected string $message = 'Reason invalid';

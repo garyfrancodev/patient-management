@@ -5,20 +5,17 @@ namespace App\Application\UseCases\Patient\Command;
 class AddMeasurementCommand
 {
     private string $patientId;
+
     private string $consultationId;
+
     private float $height;
+
     private float $weight;
+
     private float $bodyFlat;
+
     private string $notes;
 
-    /**
-     * @param string $patientId
-     * @param string $consultationId
-     * @param float $height
-     * @param float $weight
-     * @param float $bodyFlat
-     * @param string $notes
-     */
     public function __construct(string $patientId, string $consultationId, float $height, float $weight, float $bodyFlat, string $notes)
     {
         $this->patientId = $patientId;

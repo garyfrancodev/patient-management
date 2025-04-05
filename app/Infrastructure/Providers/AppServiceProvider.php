@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Event::listen(ClinicalResourceAdded::class,NotifyNutritionist::class);
-        Event::listen(CreatedAppointment::class,NotifyNutritionistWhenCreatedAppointment::class);
-        Event::listen(PatientCreated::class,SendWelcomeEmailWhenCreatedPatient::class);
+        Event::listen(ClinicalResourceAdded::class, NotifyNutritionist::class);
+        Event::listen(CreatedAppointment::class, NotifyNutritionistWhenCreatedAppointment::class);
+        Event::listen(PatientCreated::class, SendWelcomeEmailWhenCreatedPatient::class);
     }
 }

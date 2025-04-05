@@ -10,19 +10,17 @@ use Illuminate\Http\JsonResponse;
 class AddMeasurementCommandHandler
 {
     private PatientRepository $patientRepository;
+
     private UnitOfWork $unitOfWork;
 
-    /**
-     * @param PatientRepository $patientRepository
-     * @param UnitOfWork $unitOfWork
-     */
     public function __construct(PatientRepository $patientRepository, UnitOfWork $unitOfWork)
     {
         $this->patientRepository = $patientRepository;
         $this->unitOfWork = $unitOfWork;
     }
 
-    public function handle(AddMeasurementCommand $addMeasurementCommand): JsonResponse {
+    public function handle(AddMeasurementCommand $addMeasurementCommand): JsonResponse
+    {
         $patientId = $addMeasurementCommand->getPatientId();
         $consultationId = $addMeasurementCommand->getConsultationId();
         $height = $addMeasurementCommand->getHeight();
@@ -36,9 +34,8 @@ class AddMeasurementCommandHandler
             'height' => $height,
             'weight' => $weight,
             'body_fat' => $bodyFat,
-            'notes' => $notes
+            'notes' => $notes,
         ];
-
 
         $measurement = MeasurementFactory::create($data);
 
@@ -50,8 +47,6 @@ class AddMeasurementCommandHandler
             $this->unitOfWork->addDomainEvents($measurement->getDomainEvents());
         });
 
-        return response()->json(["data" => $model]);
+        return response()->json(['data' => $model]);
     }
-
-
 }

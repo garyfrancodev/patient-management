@@ -12,8 +12,11 @@ class DietaryPreferenceModel extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'dietary_preferences';
+
     protected $keyType = 'string';
+
     public $incrementing = false;
+
     protected $fillable = [
         'id',
         'patient_id',
@@ -24,5 +27,4 @@ class DietaryPreferenceModel extends Model
     {
         return $this->belongsTo(PatientModel::class, 'patient_id');
     }
-
 }

@@ -7,13 +7,9 @@ use App\Shared\Entity;
 class DietaryPreference extends Entity
 {
     private string $patientId;
+
     private string $preference;
 
-    /**
-     * @param string $patientId
-     * @param string $preference
-     * @param ?string $id
-     */
     public function __construct(string $patientId, string $preference, ?string $id = null)
     {
         parent::__construct($id);

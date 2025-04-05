@@ -15,9 +15,9 @@ class CreateAppointmentCommandHandlerTest extends TestCase
 {
     public function test_handle_creates_appointment_and_returns_json_response()
     {
-        $nutritionistId = "12345";
-        $patientId = "54321";
-        $reason = "catering";
+        $nutritionistId = '12345';
+        $patientId = '54321';
+        $reason = 'catering';
         $command = new CreateAppointmentCommand($nutritionistId, $patientId, $reason);
 
         $appointmentModelMock = Mockery::mock(AppointmentModel::class);
@@ -25,7 +25,7 @@ class CreateAppointmentCommandHandlerTest extends TestCase
             'id' => 1,
             'patient_id' => 'user_123',
             'nutritionist_id' => '12345',
-            'reason' => 'catering'
+            'reason' => 'catering',
         ];
         $appointmentModelMock->shouldReceive('toArray')->andReturn($appointmentData);
         $appointmentModelMock->shouldReceive('jsonSerialize')->andReturn($appointmentData);
@@ -39,7 +39,7 @@ class CreateAppointmentCommandHandlerTest extends TestCase
 
         $mockUnitOfWork->shouldReceive('execute')
             ->once()
-            ->andReturnUsing(function ($callback) use ($mockRepository) {
+            ->andReturnUsing(function ($callback) {
                 return $callback();
             });
 

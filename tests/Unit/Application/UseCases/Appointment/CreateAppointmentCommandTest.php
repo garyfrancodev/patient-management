@@ -9,9 +9,9 @@ class CreateAppointmentCommandTest extends TestCase
 {
     public function test_create_appointment_command_stores_correct_data()
     {
-        $nutritionistId = "12345";
-        $patientId = "54321";
-        $reason = "catering";
+        $nutritionistId = '12345';
+        $patientId = '54321';
+        $reason = 'catering';
         $command = new CreateAppointmentCommand($nutritionistId, $patientId, $reason);
 
         $this->assertEquals($nutritionistId, $command->getNutritionistId());

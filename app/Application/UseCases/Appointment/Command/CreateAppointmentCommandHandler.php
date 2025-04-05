@@ -5,25 +5,19 @@ namespace App\Application\UseCases\Appointment\Command;
 use App\Domain\Factories\AppointmentFactory;
 use App\Domain\Repositories\AppointmentRepository;
 use App\Shared\UnitOfWork;
-use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 
 class CreateAppointmentCommandHandler
 {
     private AppointmentRepository $appointmentRepository;
+
     private UnitOfWork $unitOfWork;
 
-    /**
-     * @param AppointmentRepository $appointmentRepository
-     * @param UnitOfWork $unitOfWork
-     */
     public function __construct(AppointmentRepository $appointmentRepository, UnitOfWork $unitOfWork)
     {
         $this->appointmentRepository = $appointmentRepository;
         $this->unitOfWork = $unitOfWork;
     }
-
 
     public function handle(CreateAppointmentCommand $command): JsonResponse
     {
@@ -34,7 +28,7 @@ class CreateAppointmentCommandHandler
         $model = AppointmentFactory::create([
             'patient_id' => $patientId,
             'nutritionist_id' => $nutritionistId,
-            'reason' => $reason
+            'reason' => $reason,
         ]);
 
         $appointmentModel = null;
@@ -45,7 +39,7 @@ class CreateAppointmentCommandHandler
         });
 
         return response()->json([
-            'data' => $appointmentModel
+            'data' => $appointmentModel,
         ]);
     }
 }

@@ -17,12 +17,12 @@ abstract class Entity
         }
 
         $this->id = $id ?? Str::uuid()->toString();
-        $this->domainEvents = array();
+        $this->domainEvents = [];
     }
 
     protected function checkRule($rule): void
     {
-        if (!$rule) {
+        if (! $rule) {
             throw new \InvalidArgumentException('Invalid data');
         }
     }

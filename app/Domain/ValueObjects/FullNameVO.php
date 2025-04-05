@@ -5,12 +5,13 @@ namespace App\Domain\ValueObjects;
 class FullNameVO
 {
     private string $firstName;
+
     private string $lastName;
 
     public function __construct(string $firstName, string $lastName)
     {
         if (empty($firstName) || empty($lastName)) {
-            throw new \InvalidArgumentException("First and last name cannot be empty.");
+            throw new \InvalidArgumentException('First and last name cannot be empty.');
         }
 
         $this->firstName = $firstName;
@@ -27,7 +28,8 @@ class FullNameVO
         return $this->lastName;
     }
 
-    public function getFullName(): string {
+    public function getFullName(): string
+    {
         return "{$this->firstName} {$this->lastName}";
     }
 }

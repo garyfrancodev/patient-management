@@ -10,12 +10,9 @@ use Illuminate\Http\JsonResponse;
 class CreateTicketCommandHandler
 {
     private PatientRepository $patientRepository;
+
     private UnitOfWork $unitOfWork;
 
-    /**
-     * @param PatientRepository $patientRepository
-     * @param UnitOfWork $unitOfWork
-     */
     public function __construct(PatientRepository $patientRepository, UnitOfWork $unitOfWork)
     {
         $this->patientRepository = $patientRepository;
@@ -27,7 +24,6 @@ class CreateTicketCommandHandler
         $patientId = $command->getPatientId();
         $details = $command->getDetails();
         $type = $command->getType();
-
 
         $data = [
             'patient_id' => $patientId,
@@ -44,8 +40,6 @@ class CreateTicketCommandHandler
             $this->unitOfWork->addDomainEvents($ticket->getDomainEvents());
         });
 
-        return response()->json(["data" => $model]);
+        return response()->json(['data' => $model]);
     }
-
-
 }

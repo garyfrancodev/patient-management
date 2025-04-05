@@ -7,18 +7,15 @@ use App\Shared\BusinessRule;
 class EmailAddressRule implements BusinessRule
 {
     private string $value;
+
     protected string $message = 'EmailVO format invalid';
 
     protected static string $EMAIL_PATTERN = '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,6}$/';
 
-    /**
-     * @param string $value
-     */
     public function __construct(string $value)
     {
         $this->value = $value;
     }
-
 
     public function isValid(): bool
     {

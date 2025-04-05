@@ -12,21 +12,16 @@ use Illuminate\Database\Eloquent\Model;
 
 interface PatientRepository extends Repository
 {
-    /**
-     * @param Address $entity
-     */
     public function createPatientAddress(Address $entity): Model;
-    /**
-     * @param DietaryPreference $entity
-     */
+
     public function createPatientDietaryPreference(DietaryPreference $entity): Model;
+
     /**
-     * @param DietaryPreference $entity
+     * @param  DietaryPreference  $entity
      */
     public function createPatientMeasurement(Measurement $entity): Model;
-    /**
-     * @param Ticket $entity
-     */
+
     public function createPatientTicket(Ticket $entity): Model;
+
     public function getAllPatients(): Collection;
 }

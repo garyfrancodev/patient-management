@@ -8,7 +8,7 @@ abstract class ValueObject
     {
         $rule = $businessRuleValidationException->getBrokenRule();
 
-        if (!$rule->isValid()) {
+        if (! $rule->isValid()) {
             throw $businessRuleValidationException;
         }
     }

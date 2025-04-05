@@ -12,8 +12,11 @@ class AddressModel extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'addresses';
+
     protected $keyType = 'string';
+
     public $incrementing = false;
+
     protected $fillable = [
         'id',
         'patient_id',

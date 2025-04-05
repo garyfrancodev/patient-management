@@ -16,20 +16,20 @@ class PersonConsumer
     public function getPersonById(string $id): Person
     {
         $response = $this->client->get(
-            "/person/" . $id,
+            '/person/'.$id,
             [
-                "headers" => [
-                    "Accept" => "application/json"
-                ]
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
             ]
         );
 
         $body = json_decode($response->getBody()->getContents(), true);
 
         return new Person(
-            $body["first_name"],
-            $body["last_name"],
-            $body["alias"]
+            $body['first_name'],
+            $body['last_name'],
+            $body['alias']
         );
     }
 }

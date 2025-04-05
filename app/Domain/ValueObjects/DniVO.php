@@ -10,7 +10,7 @@ class DniVO
     {
 
         if (empty($dni)) {
-            throw new \InvalidArgumentException("Identification number cannot be empty.");
+            throw new \InvalidArgumentException('Identification number cannot be empty.');
         }
 
         $this->dni = $dni;

@@ -15,7 +15,7 @@ class PatientCreated extends DomainEvent
     {
         parent::__construct();
         $this->email = $email;
-        error_log("added PatientCreatedEvent");
+        error_log('added PatientCreatedEvent');
     }
 
     public function getEmail(): string

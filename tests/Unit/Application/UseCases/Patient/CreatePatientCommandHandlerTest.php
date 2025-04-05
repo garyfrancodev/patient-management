@@ -51,7 +51,7 @@ class CreatePatientCommandHandlerTest extends TestCase
 
         $mockUnitOfWork->shouldReceive('execute')
             ->once()
-            ->andReturnUsing(function ($callback) use ($mockRepository) {
+            ->andReturnUsing(function ($callback) {
                 return $callback();
             });
 

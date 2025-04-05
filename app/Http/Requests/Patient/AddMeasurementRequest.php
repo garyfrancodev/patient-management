@@ -26,7 +26,7 @@ class AddMeasurementRequest extends FormRequest
             'height' => 'required|numeric',
             'weight' => 'required|numeric',
             'body_fat' => 'sometimes|numeric',
-            'notes' => 'sometimes|string'
+            'notes' => 'sometimes|string',
         ];
     }
 }

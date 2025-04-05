@@ -23,7 +23,7 @@ class CreateTicketRequest extends FormRequest
     {
         return [
             'type' => 'required|in:support,issue,refund,general',
-            'details' => 'required|string'
+            'details' => 'required|string',
         ];
     }
 }

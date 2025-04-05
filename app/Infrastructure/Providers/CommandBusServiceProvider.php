@@ -32,18 +32,18 @@ class CommandBusServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(CommandBus::class, function () {
-            $commandBus = new CommandBus();
-            //commands
-            $commandBus->register(CreateAppointmentCommand::class, new CreateAppointmentCommandHandler(new AppointmentRepositoryImpl(), new EloquentUnitOfWork()));
-            $commandBus->register(CreatePatientCommand::class, new CreatePatientCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
-            $commandBus->register(AddAddressCommand::class, new AddAddressCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
-            $commandBus->register(AddDietaryPreferenceCommand::class, new AddDietaryPreferenceCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
-            $commandBus->register(AddMeasurementCommand::class, new AddMeasurementCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
-            $commandBus->register(CreateTicketCommand::class, new CreateTicketCommandHandler(new PatientRepositoryImpl(), new EloquentUnitOfWork()));
+            $commandBus = new CommandBus;
+            // commands
+            $commandBus->register(CreateAppointmentCommand::class, new CreateAppointmentCommandHandler(new AppointmentRepositoryImpl, new EloquentUnitOfWork));
+            $commandBus->register(CreatePatientCommand::class, new CreatePatientCommandHandler(new PatientRepositoryImpl, new EloquentUnitOfWork));
+            $commandBus->register(AddAddressCommand::class, new AddAddressCommandHandler(new PatientRepositoryImpl, new EloquentUnitOfWork));
+            $commandBus->register(AddDietaryPreferenceCommand::class, new AddDietaryPreferenceCommandHandler(new PatientRepositoryImpl, new EloquentUnitOfWork));
+            $commandBus->register(AddMeasurementCommand::class, new AddMeasurementCommandHandler(new PatientRepositoryImpl, new EloquentUnitOfWork));
+            $commandBus->register(CreateTicketCommand::class, new CreateTicketCommandHandler(new PatientRepositoryImpl, new EloquentUnitOfWork));
 
-            //queries
-            $commandBus->register(GetAppointmentsByNutritionistIdQuery::class, new GetAppointmentsByNutritionistIdQueryHandler(new AppointmentRepositoryImpl()));
-            $commandBus->register(GetAllPatientsQuery::class, new GetAllPatientsQueryHandler(new PatientRepositoryImpl()));
+            // queries
+            $commandBus->register(GetAppointmentsByNutritionistIdQuery::class, new GetAppointmentsByNutritionistIdQueryHandler(new AppointmentRepositoryImpl));
+            $commandBus->register(GetAllPatientsQuery::class, new GetAllPatientsQueryHandler(new PatientRepositoryImpl));
 
             return $commandBus;
         });

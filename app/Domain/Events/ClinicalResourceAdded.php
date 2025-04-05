@@ -13,6 +13,6 @@ class ClinicalResourceAdded
      */
     public function __construct()
     {
-        error_log("Evento ClinicalResourceAdded disparado");
+        error_log('Evento ClinicalResourceAdded disparado');
     }
 }

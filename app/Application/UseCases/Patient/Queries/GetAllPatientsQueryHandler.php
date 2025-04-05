@@ -9,9 +9,6 @@ class GetAllPatientsQueryHandler
 {
     private PatientRepository $patientRepository;
 
-    /**
-     * @param PatientRepository $patientRepository
-     */
     public function __construct(PatientRepository $patientRepository)
     {
         $this->patientRepository = $patientRepository;
@@ -21,6 +18,6 @@ class GetAllPatientsQueryHandler
     {
         $patients = $this->patientRepository->getAllPatients();
 
-        return response()->json(["data" => $patients]);
+        return response()->json(['data' => $patients]);
     }
 }

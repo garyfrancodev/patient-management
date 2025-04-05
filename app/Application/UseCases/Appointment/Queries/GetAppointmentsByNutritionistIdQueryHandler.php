@@ -2,12 +2,8 @@
 
 namespace App\Application\UseCases\Appointment\Queries;
 
-use App\Application\UseCases\Appointment\Command\CreateAppointmentCommand;
-use App\Domain\Aggregates\Appointment;
 use App\Domain\Repositories\AppointmentRepository;
-use App\Domain\ValueObjects\ReasonVO;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 
 class GetAppointmentsByNutritionistIdQueryHandler
 {
@@ -25,11 +21,10 @@ class GetAppointmentsByNutritionistIdQueryHandler
             $data = $this->appointmentRepository->getAppointmentsByNutritionistId($nutritionistId);
 
             return response()->json([
-                "data" => $data
+                'data' => $data,
             ]);
         } catch (Exception $e) {
             return $e->getMessageResponse();
         }
     }
-
 }
