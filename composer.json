@@ -67,7 +67,8 @@
             "XDEBUG_MODE=coverage php artisan test --coverage-html=coverage"
         ],
         "cucumber:patient": "vendor/bin/behat features/patient_creation.feature",
-        "cucumber:appointment": "vendor/bin/behat features/appointment_creation.feature"
+        "cucumber:appointment": "vendor/bin/behat features/appointment_creation.feature",
+		""
     },
     "extra": {
         "laravel": {

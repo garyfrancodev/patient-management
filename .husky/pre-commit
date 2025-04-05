@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "✅ Ejecutando Pint..."
+vendor/bin/pint --test || exit 1

@@ -31,7 +31,7 @@ class CreateAppointmentCommandHandler
             'reason' => $reason,
         ]);
 
-         $appointmentModel = null;
+        $appointmentModel = null;
 
         $this->unitOfWork->execute(function () use (&$model, &$appointmentModel) {
             $appointmentModel = $this->appointmentRepository->addAsync($model);
