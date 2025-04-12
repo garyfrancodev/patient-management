@@ -41,6 +41,7 @@
     <logging>
         <!-- Genera cobertura en HTML en 'storage/test-coverage' -->
         <!-- Opcional: Muestra cobertura directamente en la consola -->
+		<log type="coverage-clover" target="storage/logs/clover.xml"/>
     </logging>
     <source>
         <include>
