@@ -148,6 +148,70 @@
             }
         },
         "/api/v1/patient": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtiene todos los pacientes registrados.",
+                "description": "Retorna una lista de pacientes.",
+                "operationId": "getAllPatients",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pacientes obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "fullName": {
+                                                "type": "string",
+                                                "example": "Juan Pérez"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "juan.perez@email.com"
+                                            },
+                                            "phone": {
+                                                "type": "string",
+                                                "example": "+1234567890"
+                                            },
+                                            "dob": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "1990-01-01"
+                                            },
+                                            "gender": {
+                                                "type": "string",
+                                                "example": "male"
+                                            },
+                                            "dni": {
+                                                "type": "string",
+                                                "example": "12345678"
+                                            },
+                                            "userId": {
+                                                "type": "string",
+                                                "example": "user_123"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitud incorrecta"
+                    },
+                    "500": {
+                        "description": "Error en el servidor"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Patients"
@@ -217,7 +281,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "PatientModel created successfully",
+                        "description": "Patient created successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -252,72 +316,6 @@
                     },
                     "400": {
                         "description": "Invalid input data"
-                    }
-                }
-            }
-        },
-        "/api/patient": {
-            "get": {
-                "tags": [
-                    "Patients"
-                ],
-                "summary": "Obtiene todos los pacientes registrados.",
-                "description": "Retorna una lista de pacientes.",
-                "operationId": "getAllPatients",
-                "responses": {
-                    "200": {
-                        "description": "Lista de pacientes obtenida exitosamente.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "example": "1"
-                                            },
-                                            "fullName": {
-                                                "type": "string",
-                                                "example": "Juan Pérez"
-                                            },
-                                            "email": {
-                                                "type": "string",
-                                                "example": "juan.perez@email.com"
-                                            },
-                                            "phone": {
-                                                "type": "string",
-                                                "example": "+1234567890"
-                                            },
-                                            "dob": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "1990-01-01"
-                                            },
-                                            "gender": {
-                                                "type": "string",
-                                                "example": "male"
-                                            },
-                                            "dni": {
-                                                "type": "string",
-                                                "example": "12345678"
-                                            },
-                                            "userId": {
-                                                "type": "string",
-                                                "example": "user_123"
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Solicitud incorrecta"
-                    },
-                    "500": {
-                        "description": "Error en el servidor"
                     }
                 }
             }

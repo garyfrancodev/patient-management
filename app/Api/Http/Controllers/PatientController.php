@@ -90,7 +90,7 @@ class PatientController extends Controller
      * Obtener todos los pacientes.
      *
      * @OA\Get(
-     *     path="/api/patient",
+     *     path="/api/v1/patient",
      *     tags={"Patients"},
      *     summary="Obtiene todos los pacientes registrados.",
      *     description="Retorna una lista de pacientes.",
