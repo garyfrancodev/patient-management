@@ -3,3 +3,6 @@
 
 echo "✅ Ejecutando Pint..."
 vendor/bin/pint --test || exit 1
+
+echo "✅ Ejecutando pruebas unitarias..."
+php artisan test --no-coverage || exit 1
