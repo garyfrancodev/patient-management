@@ -1,0 +1,71 @@
+name: CD - Deploy to Production from Main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: SSH Deploy to Droplet
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Start an SSH agent and add the private key
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # 3. Add droplet to known_hosts (to avoid prompt)
+      - name: Add droplet to known_hosts
+        env:
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          ssh-keyscan -p ${SSH_PORT} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      # 4. Test SSH connection
+      - name: Test SSH connection
+        run: ssh -o StrictHostKeyChecking=yes ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo '✅ Conexión exitosa desde GitHub Actions'"
+
+      # 5. SSH in and deploy
+      - name: Deploy via SSH
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          ssh -p $SSH_PORT $SSH_USER@$SSH_HOST << 'EOF'
+            set -e
+
+            echo "🚀 Iniciando deploy en $HOSTNAME..."
+
+            # Ir al repositorio local
+            cd /home/repos/patient-management
+            git fetch origin
+            git reset --hard origin/main
+
+            # Instalar dependencias PHP
+            composer install --no-dev --optimize-autoloader
+
+            # Asegurar destino de deploy
+            mkdir -p /var/www/patient-management
+
+            # Copiar los archivos al destino
+            rsync -av --delete --exclude='.git' ./ /var/www/patient-management/
+
+            # Cambiar permisos (opcional, según configuración de Nginx)
+            chown -R www-data:www-data /var/www/patient-management
+
+            # Ejecutar comandos de Laravel
+            cd /var/www/patient-management
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+
+            echo "✅ Deploy finalizado con éxito en $HOSTNAME"
+          EOF
