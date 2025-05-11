@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Patient Management Swagger",
+        "title": "Holas desde Digital Ocean",
         "version": "0.1"
     },
     "paths": {
