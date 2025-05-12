@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Holas desde Digital Ocean with develop",
+        "title": "Holas desde Digital Ocean with main",
         "version": "0.1"
     },
     "paths": {
