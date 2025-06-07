@@ -7,10 +7,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-rdkafka": "*",
         "darkaonline/l5-swagger": "^8.6",
         "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "mateusjunges/laravel-kafka": "^2.5"
     },
     "require-dev": {
         "behat/behat": "^3.19",
