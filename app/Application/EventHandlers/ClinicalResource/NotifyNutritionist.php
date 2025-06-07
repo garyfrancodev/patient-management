@@ -11,7 +11,6 @@ class NotifyNutritionist
      */
     public function handle(ClinicalResourceAdded $event)
     {
-        error_log('Listener ejecutado: NotifyNutritionist');
 
         return 'gary';
     }

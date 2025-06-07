@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+	'kafka' => [
+		'brokers' => env('KAFKA_BROKERS', 'localhost:29092'),
+	],
+
 ];
