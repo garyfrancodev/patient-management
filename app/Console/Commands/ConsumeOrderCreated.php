@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Junges\Kafka\Contracts\ConsumerMessage;
 use Junges\Kafka\Facades\Kafka;
+use Src\Sales\Patient\Infraestructure\Kafka\PatientBrokerHandler;
 
 class ConsumeOrderCreated extends Command
 {
@@ -14,15 +15,17 @@ class ConsumeOrderCreated extends Command
 	public function handle()
 	{
 		$this->info('Esperando mensajes del tópico order.created...');
+		$consumerGroupId = config('kafka.consumer_group_id');
+		$brokers = config('kafka.brokers');
 
-		Kafka::consumer(['order.created'], 'order-consumer-group-'.uniqid(), config('services.kafka.brokers'))
-			->withOptions([
-				'auto.offset.reset' => 'earliest',
-			])
-			->withHandler(function (ConsumerMessage $message) {
-				logger()->info('Recibido desde Kafka', $message->getBody());
-			})
-			->build()
-			->consume();
+
+		$consumer = Kafka::consumer(['order.created'], $consumerGroupId)
+			->withBrokers($brokers)
+			->withConsumerGroupId($consumerGroupId)
+			->withHandler(new BrokerHandler)
+			->withAutoCommit(false)
+			->build();
+
+		$consumer->consume();
 	}
 }
