@@ -25,7 +25,7 @@ class PatientController extends Controller
 {
 	/**
 	 * @OA\Post(
-	 *     path="/api/v1/patient",
+	 *     path="/patient/create",
 	 *     tags={"Patients"},
 	 *     summary="Create a new patient",
 	 *     description="Handles the creation of a new patient.",
@@ -72,6 +72,7 @@ class PatientController extends Controller
 	 */
 	public function store(CreatePatientRequest $request): JsonResponse
 	{
+		error_log("test");
 		$data = $request->validated();
 
 		$dob = Carbon::createFromFormat('Y-m-d', $data['dob']);
