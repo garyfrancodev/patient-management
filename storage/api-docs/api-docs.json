@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Holas desde Digital Ocean with main",
+        "title": "My First API",
         "version": "0.1"
     },
     "paths": {
@@ -147,78 +147,14 @@
                 }
             }
         },
-        "/api/v1/patient": {
-            "get": {
-                "tags": [
-                    "Patients"
-                ],
-                "summary": "Obtiene todos los pacientes registrados.",
-                "description": "Retorna una lista de pacientes.",
-                "operationId": "getAllPatients",
-                "responses": {
-                    "200": {
-                        "description": "Lista de pacientes obtenida exitosamente.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "example": "1"
-                                            },
-                                            "fullName": {
-                                                "type": "string",
-                                                "example": "Juan Pérez"
-                                            },
-                                            "email": {
-                                                "type": "string",
-                                                "example": "juan.perez@email.com"
-                                            },
-                                            "phone": {
-                                                "type": "string",
-                                                "example": "+1234567890"
-                                            },
-                                            "dob": {
-                                                "type": "string",
-                                                "format": "date",
-                                                "example": "1990-01-01"
-                                            },
-                                            "gender": {
-                                                "type": "string",
-                                                "example": "male"
-                                            },
-                                            "dni": {
-                                                "type": "string",
-                                                "example": "12345678"
-                                            },
-                                            "userId": {
-                                                "type": "string",
-                                                "example": "user_123"
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Solicitud incorrecta"
-                    },
-                    "500": {
-                        "description": "Error en el servidor"
-                    }
-                }
-            },
+        "/patient/create": {
             "post": {
                 "tags": [
                     "Patients"
                 ],
                 "summary": "Create a new patient",
                 "description": "Handles the creation of a new patient.",
-                "operationId": "cdcfa3cbe41a5fbd8f6abbd9f06f710a",
+                "operationId": "2d3537b524a4f7bbe1031f3030acd5ca",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -316,6 +252,72 @@
                     },
                     "400": {
                         "description": "Invalid input data"
+                    }
+                }
+            }
+        },
+        "/api/v1/patient": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtiene todos los pacientes registrados.",
+                "description": "Retorna una lista de pacientes.",
+                "operationId": "getAllPatients",
+                "responses": {
+                    "200": {
+                        "description": "Lista de pacientes obtenida exitosamente.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "fullName": {
+                                                "type": "string",
+                                                "example": "Juan Pérez"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "juan.perez@email.com"
+                                            },
+                                            "phone": {
+                                                "type": "string",
+                                                "example": "+1234567890"
+                                            },
+                                            "dob": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "1990-01-01"
+                                            },
+                                            "gender": {
+                                                "type": "string",
+                                                "example": "male"
+                                            },
+                                            "dni": {
+                                                "type": "string",
+                                                "example": "12345678"
+                                            },
+                                            "userId": {
+                                                "type": "string",
+                                                "example": "user_123"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitud incorrecta"
+                    },
+                    "500": {
+                        "description": "Error en el servidor"
                     }
                 }
             }

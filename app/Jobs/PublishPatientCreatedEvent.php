@@ -28,7 +28,7 @@ class PublishPatientCreatedEvent implements ShouldQueue
     public function handle(): void
     {
 	    Kafka::publish(config('services.kafka.brokers'))
-		    ->onTopic('order.created')
+		    ->onTopic('patient.created')
 		    ->withBody($this->data)
 		    ->send();
     }
